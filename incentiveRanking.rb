@@ -10,14 +10,26 @@
 #     ・2 行目に、半角英文字で構成される文字列が N 個スペース区切りで与えられます。
 #     ・3 行目に、全メンバーが学習した回数 M が文字列型の整数で与えられます。
 #     ・4 行目から続く M 行には、 学習した人の名前を表す半角英文字で構成される文字列 と
-#     　学習コストを表す文字列型の整数 がこの順にスペース区切りで与えられます。
+#     ・学習コストを表す文字列型の整数 がこの順にスペース区切りで与えられます。
 #     ・入力は合計で M + 3 行となり、入力値最終行の末尾に改行が１つ入ります。
 
 # 解答：
 1.upto 3 do |t|
   puts "例#{t}の答え"
   File.open("data00#{t}.txt", "r"){ |f|
-    # ここにプログラムを記述してください。
+    num = f.gets.to_i
+    members = f.gets.split
+    results = {}
+    
+    num.times do |i|
+      results[members[i]] = 0
+    end
+    m = f.gets.to_i
+    m.times do |i|
+      cost = f.gets.split
+      results[cost[0]] += cost[1].to_i
+    end
+    p results.sort_by{ | k, v | v }.reverse.to_h
   }
 end
 
